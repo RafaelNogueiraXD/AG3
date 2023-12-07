@@ -1,16 +1,16 @@
 nao implementei nada, apenas copiei os codigos disponiveis pela professora
 
 tarefas e suas etapas(nessa parte descreveremos tudo que falta a ser feito, e se aquele depende diretamente de algo para ser feito):
-    1. Classe Produto
+    1. Classe Produto (exemplo, Rafael)
     - Definir a classe Produto com os atributos código, nome, descrição, quantidade, preço e validade.
     - Implementar subclasses para produtos vendidos por unidade e por quilo.
     - Definir o tipo de dado para o atributo quantidade com base na categoria do produto.
 
-    2. Classe de Processamento para Produtos 
+    2. Classe de Processamento para Produtos  (exemplo, thiago)
     - Implementar a classe de processamento para produtos  que implementa a interface IProdutos.
     - Criar métodos para manipular a coleção de produtos em estoque.
 
-    3. Classe NotaFiscal
+    3. Classe NotaFiscal (exemplo, bernardo )
     - Definir a classe NotaFiscal com os atributos código, data, relação de itens e total.
     - Criar a relação entre a NotaFiscal e os produtos vendidos.
 
