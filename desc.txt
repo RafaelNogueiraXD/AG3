@@ -1,10 +1,33 @@
 nao implementei nada, apenas copiei os codigos disponiveis pela professora
 
 tarefas e suas etapas(nessa parte descreveremos tudo que falta a ser feito, e se aquele depende diretamente de algo para ser feito):
-    exemplo:
-        classe A, não depende de nada - Rafael
-        classe B, depende da A - Bernardo
-        classe C, nao depende de nada - thiago
+    1. Classe Produto
+    - Definir a classe Produto com os atributos código, nome, descrição, quantidade, preço e validade.
+    - Implementar subclasses para produtos vendidos por unidade e por quilo.
+    - Definir o tipo de dado para o atributo quantidade com base na categoria do produto.
 
+    2. Classe de Processamento para Produtos 
+    - Implementar a classe de processamento para produtos  que implementa a interface IProdutos.
+    - Criar métodos para manipular a coleção de produtos em estoque.
 
-    
+    3. Classe NotaFiscal
+    - Definir a classe NotaFiscal com os atributos código, data, relação de itens e total.
+    - Criar a relação entre a NotaFiscal e os produtos vendidos.
+
+    4. Classe de Processamento para Notas Fiscais 
+    - Implementar a classe de processamento para notas fiscais  que implementa a interface INotasFiscais.
+    - Criar métodos para manipular a coleção de notas fiscais.
+
+    5. Interatividade com o Usuário
+    - Desenvolver a interação com o usuário para cadastro, consulta, alteração e exclusão de produtos.
+    - Implementar a interação com o usuário para criação, consulta e alteração de notas fiscais.
+
+    6. Persistência de Dados
+    - Implementar a persistência em arquivo para as coleções de produtos e notas fiscais.
+
+    7. Tratamento de Exceções
+    - Implementar o tratamento de exceções para evitar impactos na execução do software,.
+
+Essa lista fornece uma visão geral das tarefas a serem realizadas e suas dependências. Cada tarefa pode ser dividida em etapas menores de acordo com as necessidades do desenvolvimento.
+
+Em openGl, a maquina de estados basicamento monitora eventos e dispara chamadas as funçoes resgistradas como callback.Cite exemplios de comandos responsaveis por registros das callbacks
