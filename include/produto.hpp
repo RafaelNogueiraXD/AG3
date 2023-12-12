@@ -1,7 +1,9 @@
 #include <iostream>
 #include <string>
 #include "data.hpp"
-#pragma once;
+#include<variant>
+#pragma once; 
+//oi eu sou a anni, prazer rafael
 using namespace std;
 enum tipo {
     peso ,
@@ -11,7 +13,7 @@ class Produto {
 private:
     int codigo;
     string nome;
-    double qtd;
+    variant<int,double> quantidade;
     double valor;
     string desc;
     Data validade;
