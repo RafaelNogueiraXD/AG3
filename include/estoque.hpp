@@ -7,6 +7,7 @@ class Estoque {
     private:
         //esse pair refere-se que int é o idProduto e Produto é o Produto :)
         vector<pair<int, Produto>> Produtos;
+        
 
     public: 
 

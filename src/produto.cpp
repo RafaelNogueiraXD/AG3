@@ -1,8 +1,10 @@
 #include <iostream>
 #include "produto.hpp"
 using namespace std;
-Produto::Produto(int codigo1, string nome1, double qtd1, double valor1, string desc1, Data validade1)
-    : codigo(codigo1), nome(nome1), qtd(qtd1), valor(valor1), desc(desc1), validade(validade1) {
+Produto::Produto(int codigo1, string nome1, double qtd1, double valor1, string desc1, Data validade1, string qtdTipo1)
+     : codigo(codigo1), nome(nome1), qtd(qtd1), valor(valor1), desc(desc1), validade(validade1){
+    if(qtdTipo1 == "peso") qtdTipo = peso;
+    else qtdTipo = unidade;
 }
 
 string Produto::getNome() {
@@ -47,6 +49,13 @@ void Produto::setDesc(string desc1) {
 Data Produto::getValidade() {
     return validade;
 }
+tipo Produto::getqtdTipo(){
+    return qtdTipo;
+}  
+void Produto::setqtdTipo(tipo qtd1Tipo){
+    qtd1Tipo = qtdTipo;
+}  
+    
 
 void Produto::setValidade(Data validade1) {
     validade = validade1;
@@ -58,9 +67,10 @@ void Produto::showProduct(){
     cout << "Valor: " << valor << endl;
     cout << "Descricao: " << desc << endl;
     cout << "Validade" << validade << endl;
+    if(getqtdTipo() == peso)
+        cout << "peso (Kg)" << endl;
+    else cout << "unidade";
 }
-
-
 /*
     - imagenemos um estoque, no qual ele receberá produto
     

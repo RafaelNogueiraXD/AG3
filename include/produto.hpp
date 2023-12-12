@@ -3,7 +3,10 @@
 #include "data.hpp"
 #pragma once;
 using namespace std;
-
+enum tipo {
+    peso ,
+    unidade
+};
 class Produto {
 private:
     int codigo;
@@ -12,15 +15,18 @@ private:
     double valor;
     string desc;
     Data validade;
+    tipo qtdTipo;
 
 public:
-   Produto(int codigo1, string nome1, double qtd1, double valor1, string desc1, Data validade1);
+   Produto(int codigo1, string nome1, double qtd1, double valor1, string desc1, Data validade1, string qtdtipo);
 
     // Getters e Setters existentes
     string getNome();  
     void setNome(string nome1);  
     double getqtd();  
     void setqtd(double qtd1);  
+    tipo getqtdTipo();  
+    void setqtdTipo(tipo qtd1Tipo);  
     double getvalor();  
     void setvalor(double valor1);
 

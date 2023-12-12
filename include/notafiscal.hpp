@@ -1,57 +1,27 @@
 #include <iostream>
+#include <vector>
 #include "item.hpp"
-using namespace std;
 
-/**
- * Interface que especifica os métodos míninos para manipular o conunto de notas fiscais.
- * @author Aline
- */
+// código, data, relação de itens e total, 
 class NotaFiscal {
-public:
-            
-    /**
-     * Adiciona uma nota fiscal.
-     * @param nf Nota fiscal a ser adicionada.
-     * @return True se a nota for incluída com sucesso e False caso contrário.
-     */
-    virtual bool addNotaFiscal(NotaFiscal nf);
-    
-    /**
-     * Remove a nota fiscal com código informado.
-     * @param codigo Código da nota fiscal a ser removida.
-     * @return True se a nota for removida com sucesso e False caso contrário.
-     */
-    virtual bool removeNotaFiscal(int codigo);
-    
-    /**
-     * Captura a nota fiscal com a nota fiscal informada.
-     * @param codigo Código da nota fiscal a ser capturada.
-     * @return A nota fiscal com o código informado ou NULL caso a nota fiscal não seja encontrada.
-     */
-    virtual NotaFiscal getNotaFiscal(int codigo);
-    
-    /**
-     * Altera a nota fiscal com o código informado.
-     * @param codigo Código da nota fiscal a ser alterada.
-     * @param nova Nota fiscal com as novas informações.
-     * @return True se a nota fiscal foi corretamente atualizada e False caso contrário.
-     */
-   virtual bool updateNotaFiscal(int codigo, NotaFiscal nova);
+    private:
+        int codigo;
+        Data data;
+        vector<Item> itens;
+        int total;
+    public:
+        // Construtor
+        NotaFiscal(int codigo, Data data, double total);
 
+        // Getters
+        int getCodigo() const;
+        Data getData() const;
+        const vector<Item>& getItens() const;
+        double getTotal() const;
 
-    /**
-     * Adiciona um item a nota fiscal com o código informado.
-     * @param codigo Código da nota fiscal na qual o item deve ser adicionado.
-     * @param item Item a ser adicionado.
-     * @return True caso o item foi adicionado com sucesso e False caso a nota fiscal não exista ou a quantidade do produto em estoque seja menor do que a solicitada.
-     */
-    virtual bool addItem(int codigo, Item item);
-    
-    /**
-     * Remove um item da nota fiscal com o código informado.
-     * @param codigo Código da nota fiscal na qual o item deve ser removido.
-     * @param item Item a ser removido.
-     * @return True caso o item foi removido com sucesso e False caso contrário.
-     */
-    virtual bool removeItem(int codigo, Item item);
+        // Setters
+        void setCodigo(int codigo);
+        void setData(const Data& data);
+        void setItens(const vector<Item>& itens);
+        void setTotal(double total);
 };

@@ -2,15 +2,16 @@
 #include <iostream>
 #include <string>
 #include "interface.hpp"
+#include "estoque.hpp"
 #include "notafiscal.hpp"
-#include "produto.hpp"
 
 using namespace std;
 InterfaceG::InterfaceG(){
     // 
     //    teste();
-    Produto prod = Produto(1, "rafael", 21,99999, "ser humano", {12,12,2023});
+    Produto prod = Produto(1, "rafael", 21,99999, "ser humano", {12,12,2023}, "unidade");
     prod.showProduct();
+
 }
 int InterfaceG::pegaInteiro(string enunciado){
     int valor;
