@@ -2,19 +2,15 @@
 #include <iostream>
 #include <string>
 #include "interface.hpp"
+#include "notafiscal.hpp"
+#include "produto.hpp"
 
 using namespace std;
 InterfaceG::InterfaceG(){
     // 
-    string nome = pegaString("digite um nome: ");
-    int valor = pegaInteiro("digite um valor: ");
-    string nome2 = pegaString("digite outro nome: ");
-    int valor2 = pegaInteiro("digite outro valor: ");
-    
-    cout << valor << endl;
-    cout << nome << endl;
-    cout << nome2 << endl;
-    cout << valor2 << endl;
+    //    teste();
+    Produto prod = Produto(1, "rafael", 21,99999, "ser humano", {12,12,2023});
+    prod.showProduct();
 }
 int InterfaceG::pegaInteiro(string enunciado){
     int valor;
@@ -30,5 +26,6 @@ string InterfaceG::pegaString(string enunciado){
     getline(cin, conteudo);    
     return conteudo;
 }
+
 // void InterfaceG::menu(){
 // }
