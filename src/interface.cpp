@@ -7,20 +7,18 @@
 
 using namespace std;
 InterfaceG::InterfaceG(){
-    Estoque mercado = Estoque("./assets/mercado.csv");
-    cout << "adicionando uma nota fiscal" << endl;
-    int x = 15;
-    vector<Item> itensNota;
-    double valor = 0;
-    while(x < 20){
-        Produto pesquisa = mercado.getProduto(x);
-        Item item = Item(pesquisa.getCodigo(),pesquisa, 1);
-        valor += pesquisa.getvalor();
-        mercado.subQuantidade(x,1);
-        itensNota.push_back(item);
-        x++;
-    }
-    NotaFiscal notinha = NotaFiscal(1,{14,12,2023}, itensNota, valor);
+    int opcao;
+    Produto prod();
+    Estoque MeuEstoque("./assets/mercado.csv");
+    do{
+        opcao=menu();
+        switch(opcao){
+            case 0:
+                break;
+            case 2: 
+                break;
+        }
+    }while(opcao != 0 );
     
 }
 int InterfaceG::pegaInteiro(string enunciado){
@@ -48,4 +46,19 @@ void InterfaceG::testeEstoque(){
     Produto prod2 = Produto(91, "di", 5,100, "ete", {10,05,2052}, "peso");
     mercado.updateProduto(91, prod2);
     mercado.getProduto(91).showProduct();
+}
+
+int InterfaceG::menu(){
+    int opcao;
+    cout<<"O-Sair"<<endl;
+    cout<<"1-Realizar compra"<<endl;
+    cout<<"2-Adcionar Produto ao estoque"<<endl;
+    cout<<"3-Remover Produto do estoque"<<endl;
+    cout<<"4-Editar Produto do estoque"<<endl;
+    cout<<"5-Mostrar estoque"<<endl;
+    cout<<"6-Ver notas fiscais"<<endl;
+    cout<<"7-Buscar Produto"<<endl;
+    cout<<"8-Buscar Nota Fiscal"<<endl;
+    cin >> opcao;
+    return opcao;
 }

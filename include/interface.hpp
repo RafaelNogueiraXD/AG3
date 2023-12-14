@@ -11,4 +11,5 @@ class InterfaceG {
         int pegaInteiro(string enunciado);
         void testeEstoque();
         void teste();
+        int menu();
 };
