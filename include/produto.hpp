@@ -3,7 +3,7 @@
 #include "data.hpp"
 #include<variant>
 #pragma once; 
-//oi eu sou a anni, prazer rafael
+
 using namespace std;
 enum tipo {
     peso ,
@@ -13,7 +13,7 @@ class Produto {
 private:
     int codigo;
     string nome;
-    variant<int,double> quantidade;
+    double quantidade;
     double valor;
     string desc;
     Data validade;
@@ -25,8 +25,8 @@ public:
     // Getters e Setters existentes
     string getNome();  
     void setNome(string nome1);  
-    double getqtd();  
-    void setqtd(double qtd1);  
+    double getQuantidade();  
+    void setQuantidade(double quantidade1);  
     tipo getqtdTipo();  
     void setqtdTipo(tipo qtd1Tipo);  
     double getvalor();  
@@ -40,4 +40,6 @@ public:
     Data getValidade();
     void setValidade(Data validade1);
     void showProduct();
+    string toString() const;
+    void mostraQuantidade();
 };

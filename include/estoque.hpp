@@ -1,24 +1,26 @@
 #include <iostream>
 #include <vector>
+#include <sstream>
+#include <fstream>
 #include "produto.hpp"
 
 using namespace std;
 class Estoque {
-    private:
+    protected:
         //esse pair refere-se que int é o idProduto e Produto é o Produto :)
-        vector<pair<int, Produto>> Produtos;
-        
-
+        vector<pair<int, Produto>> produtos;
     public: 
 
-  Estoque(string caminhoCSV);
-  virtual bool addProduto(Produto p); 
+  Estoque(const string& caminhoArquivo);
+   bool addProduto(Produto p); 
 
-  virtual bool removeProduto(int codigo);
-  virtual Produto getProduto(int codigo);
-  //virtual void setProduto();  
-  virtual bool updateProduto(int codigo, Produto novo);
-  virtual bool updatePreco(int codigo, double novo);
-  virtual bool addQuantidade(int codigo, double quantidade);
-  virtual bool subQuantidade(int codigo, double quantidade);
+   bool removeProduto(int codigo);
+   Produto getProduto(int codigo);
+  // void setProduto(); 
+   bool updateProduto(int codigo, Produto novo);
+   bool updatePreco(int codigo, double novo);
+   bool addQuantidade(int codigo, double quantidade);
+   bool subQuantidade(int codigo, double quantidade);
+   void mostraEstoque();
+   string toString() ;
 };

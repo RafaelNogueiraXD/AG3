@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <sstream>
 using namespace std;
 
 // Definição da classe Data
@@ -32,7 +33,7 @@ public:
      */
     int getDia() const;
     int getAno() const;
-
+    // Data convertDate(const std::string& date);
     /**
      * @brief Obtém o valor do mês.
      * 

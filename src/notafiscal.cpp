@@ -4,6 +4,10 @@
 NotaFiscal::NotaFiscal(int codigo, Data data, double total)
     : codigo(codigo), data(data), total(total) {}
 
+
+NotaFiscal::NotaFiscal(int cod, Data dat, vector<Item> itens, double total)
+    : codigo(codigo), itens(itens), data(data), total(total) {}
+
 // Getters
 int NotaFiscal::getCodigo() const {
     return codigo;

@@ -2,8 +2,11 @@
 #include "produto.hpp"
 using namespace std;
 Produto::Produto(int codigo1, string nome1, double qtd1, double valor1, string desc1, Data validade1, string qtdTipo1)
-     : codigo(codigo1), nome(nome1), qtd(qtd1), valor(valor1), desc(desc1), validade(validade1){
-    if(qtdTipo1 == "peso") qtdTipo = peso;
+     : codigo(codigo1), nome(nome1),quantidade(qtd1), valor(valor1), desc(desc1), validade(validade1){
+    if(qtdTipo1 == "peso"){
+        qtdTipo = peso;
+        
+    }
     else qtdTipo = unidade;
 }
 
@@ -15,13 +18,13 @@ void Produto::setNome(string nome1) {
     nome = nome1;
 }
 
-double Produto::getqtd() {
-    return qtd;
+double Produto::getQuantidade() {
+    return quantidade;
 }
 
-void Produto::setqtd(double qtd1) {
-    qtd = qtd1;
-}
+void Produto::setQuantidade(double qtd1) {
+    quantidade = qtd1;
+} 
 
 double Produto::getvalor() {
     return valor;
@@ -63,13 +66,19 @@ void Produto::setValidade(Data validade1) {
 void Produto::showProduct(){
     cout << "Codigo: " << codigo << endl;
     cout << "Nome: " << nome << endl;
-    cout << "Quantidade: " << qtd<< endl;
     cout << "Valor: " << valor << endl;
     cout << "Descricao: " << desc << endl;
-    cout << "Validade" << validade << endl;
+    cout << "Validade: " << validade << endl;
+    cout << "Quantidade: " << quantidade;
     if(getqtdTipo() == peso)
-        cout << "peso (Kg)" << endl;
-    else cout << "unidade";
+        cout << " (Kg)" << endl;
+    else cout << " unidades" << endl;
+}
+string Produto::toString() const {
+    stringstream ss;
+    ss << "Nome: " << nome << ", Preço: " << valor << "\n Quantidade: " << quantidade;
+
+    return ss.str();
 }
 /*
     - imagenemos um estoque, no qual ele receberá produto

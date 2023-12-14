@@ -1,58 +1,83 @@
 #include <iostream>
-#include "item.hpp"
+#include <vector>
+#include <unordered_map>
 #include "notafiscal.hpp"
 using namespace std;
 
-/**
- * Interface que especifica os métodos míninos para manipular o conunto de notas fiscais.
- * @author Aline
- */
+// Definições prévias de Data, Produto, Item, NotaFiscal
+
 class INotasFiscais {
+private:
+    vector<pair<int, NotaFiscal>> notasFiscais;
 public:
-            
-    /**
-     * Adiciona uma nota fiscal.
-     * @param nf Nota fiscal a ser adicionada.
-     * @return True se a nota for incluída com sucesso e False caso contrário.
-     */
-    virtual bool addNotaFiscal(NotaFiscal nf);
-    
-    /**
-     * Remove a nota fiscal com código informado.
-     * @param codigo Código da nota fiscal a ser removida.
-     * @return True se a nota for removida com sucesso e False caso contrário.
-     */
-    virtual bool removeNotaFiscal(int codigo);
-    
-    /**
-     * Captura a nota fiscal com a nota fiscal informada.
-     * @param codigo Código da nota fiscal a ser capturada.
-     * @return A nota fiscal com o código informado ou NULL caso a nota fiscal não seja encontrada.
-     */
-    virtual NotaFiscal getNotaFiscal(int codigo);
-    
-    /**
-     * Altera a nota fiscal com o código informado.
-     * @param codigo Código da nota fiscal a ser alterada.
-     * @param nova Nota fiscal com as novas informações.
-     * @return True se a nota fiscal foi corretamente atualizada e False caso contrário.
-     */
-   virtual bool updateNotaFiscal(int codigo, NotaFiscal nova);
+    bool addNotaFiscal(NotaFiscal nf) {
+         for (auto &item : notasFiscais)
+          {
+              if (item.first == nf.getCodigo())
+              {
+                  return false; // Produto já existe
+              }
+          }
+          notasFiscais.push_back(make_pair(nf.getCodigo(), nf));
+          return true;
+     }
 
+    bool removeNotaFiscal(int codigo) {
+        for (auto it = notasFiscais.begin(); it != notasFiscais.end(); ++it)
+        {
+            if (it->first == codigo)
+            {
+                notasFiscais.erase(it);
+                return true;
+            }
+        }
+        return false;
+    }
 
-    /**
-     * Adiciona um item a nota fiscal com o código informado.
-     * @param codigo Código da nota fiscal na qual o item deve ser adicionado.
-     * @param item Item a ser adicionado.
-     * @return True caso o item foi adicionado com sucesso e False caso a nota fiscal não exista ou a quantidade do produto em estoque seja menor do que a solicitada.
-     */
-    virtual bool addItem(int codigo, Item item);
-    
-    /**
-     * Remove um item da nota fiscal com o código informado.
-     * @param codigo Código da nota fiscal na qual o item deve ser removido.
-     * @param item Item a ser removido.
-     * @return True caso o item foi removido com sucesso e False caso contrário.
-     */
-    virtual bool removeItem(int codigo, Item item);
+    NotaFiscal getNotaFiscal(int codigo) {
+      for (auto &item : notasFiscais)
+      {
+          if (item.first == codigo)
+          {
+              return item.second;
+          }
+      }
+      throw runtime_error("Produto não encontrado");
+    }
+
+    bool updateNotaFiscal(int codigo, NotaFiscal nova) {
+      for (auto &item : notasFiscais)
+      {
+          if (item.first == codigo)
+          {
+              item.second = nova;
+              return true;
+          }
+      }
+      return false;
+    }
+
+    bool addItem(int codigo, Item item) {
+        NotaFiscal pesquisa = this->getNotaFiscal(codigo);
+        vector<Item> it1 = pesquisa.getItens();
+        it1.push_back(item);
+        pesquisa.setItens(it1);
+        this->updateNotaFiscal(codigo, pesquisa);
+    }
+
+    bool removeItem(int codigo) {
+        /*
+          NotaFiscal pesquisa = this->getNotaFiscal(codigo);
+          vector<Item> it1 = pesquisa.getItens();
+          vector<Item> novos;
+          for(const auto&item1 : it1){
+              if(item1.getCodigo() != 1 )
+          }
+          this->updateNotaFiscal(codigo, pesquisa);
+        */
+    }
+
 };
+
+// Implementações de Data, Produto, Item, NotaFiscal
+

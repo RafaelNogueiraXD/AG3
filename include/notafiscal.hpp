@@ -12,6 +12,7 @@ class NotaFiscal {
     public:
         // Construtor
         NotaFiscal(int codigo, Data data, double total);
+        NotaFiscal(int cod, Data dat, vector<Item> itens, double total);
 
         // Getters
         int getCodigo() const;
