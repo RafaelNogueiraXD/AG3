@@ -11,4 +11,5 @@ class Item {
         Item(int codigo,Produto prod, double qtd);
         Produto getProduto();
         int getCodigo();
+        double getQtd();
 };

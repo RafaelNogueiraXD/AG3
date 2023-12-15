@@ -18,4 +18,6 @@ class InterfaceG {
         void teste();
         int menu();
         Estoque realizarCompra(Estoque mercado);
+        void mostrarNotasFiscais();
+        NotaFiscal buscaNota(int codigo);
 };

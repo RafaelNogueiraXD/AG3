@@ -1,9 +1,13 @@
 
 #include <iostream>
 #include <string>
+#include <chrono>
+#include <iomanip>
+#include <fstream>
+#include <ctime>
 #include "interface.hpp"
-
 using namespace std;
+void saveNotasFiscaisToCSV(const std::vector<NotaFiscal>& notas, const std::string& filename);
 InterfaceG::InterfaceG(){
     int opcao;
     Estoque MeuEstoque("./assets/mercado.csv");
@@ -12,6 +16,9 @@ InterfaceG::InterfaceG(){
         switch(opcao){
             case 0:
                 break;
+            case 1:
+                MeuEstoque = realizarCompra(MeuEstoque);
+            break;
             case 2:{
                 int codigo;
                 string nome,desc, qtdtipo;
@@ -45,6 +52,9 @@ InterfaceG::InterfaceG(){
             case 5:
                 MeuEstoque.mostraEstoque();
                 break;
+            case 6:
+                mostrarNotasFiscais();
+            break;
             case 7:{
                 int codigo;
                 codigo = pegaInteiro("Digite o Código do Produto a ser excluido:");
@@ -52,10 +62,12 @@ InterfaceG::InterfaceG(){
                 Busca.showProduct();
                 break;
             }
+            
 
 
         }
     }while(opcao != 0 );
+    saveNotasFiscaisToCSV(notasfiscais,"notas.csv");
     
 }
 int InterfaceG::pegaInteiro(string enunciado){
@@ -99,19 +111,29 @@ int InterfaceG::menu(){
     cout<<"2-Adcionar Produto ao estoque"<<endl;
     cout<<"3-Remover Produto do estoque"<<endl;
     cout<<"4-Editar Produto do estoque"<<endl;
+    cout<<"7-Buscar Produto"<<endl;
     cout<<"5-Mostrar estoque"<<endl;
     cout<<"6-Ver notas fiscais"<<endl;
-    cout<<"7-Buscar Produto"<<endl;
     cout<<"8-Buscar Nota Fiscal"<<endl;
     cin >> opcao;
     return opcao;
 }
 Estoque InterfaceG::realizarCompra(Estoque mercado){
-    int op, numProdutos;
+    int op = 0, numProdutos;
+    float valorTotal;
+    vector<Item> itens;
+        auto now = std::chrono::system_clock::now();
+
+    // Converte para um objeto time_t para poder usar com funções de tempo C padrão
+    std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+
+    // Converte para uma estrutura tm local
+    struct tm *parts = std::localtime(&now_c);
     do{
 
         mercado.mostraEstoque();
         op = pegaInteiro("digite o numero do produto");
+        if (op == 0)break;
         Produto pesquisado = mercado.getProduto(op); 
         numProdutos = pegaDouble("digite a quantia desse produto");
         while(pesquisado.getQuantidade() < numProdutos){
@@ -120,7 +142,85 @@ Estoque InterfaceG::realizarCompra(Estoque mercado){
         while(numProdutos - int(numProdutos) != 0 && pesquisado.getqtdTipo() == unidade){
             numProdutos = pegaDouble("digite um numero inteiro: ");
         }
+        mercado.subQuantidade(pesquisado.getCodigo(), numProdutos);
+        Item itemVal(pesquisado.getCodigo(),pesquisado, numProdutos);
+        itens.push_back(itemVal);
 
-    }while(op);
+        valorTotal += numProdutos * pesquisado.getvalor();
+        cout << " valor total: " << valorTotal << endl;
+    }while(op != 0);
+    int codigo;
 
+    if(notasfiscais.size() == 0){
+        
+        codigo = 1;
+    }else{
+        NotaFiscal nt = notasfiscais.back();
+        codigo = nt.getCodigo();
+    }
+    cout << codigo << endl;
+    NotaFiscal nova(codigo,{14, 12, 2023}, itens, valorTotal);
+    notasfiscais.push_back(nova);
+    return mercado;
+}
+void InterfaceG::mostrarNotasFiscais(){
+    for( auto& nt : notasfiscais){
+        nt.showNota();
+    }
+}
+NotaFiscal InterfaceG::buscaNota(int codigo){
+    for(auto&nt : notasfiscais){
+        if(nt.getCodigo() == codigo){
+            return nt;
+        }
+    }
+    NotaFiscal nt1(0);
+    return nt1;
+}
+
+
+void saveNotasFiscaisToCSV(const std::vector<NotaFiscal>& notas, const std::string& filename) {
+    std::ofstream file(filename);
+
+    // Cabeçalho do CSV
+    file << "Codigo,Data,Total\n";
+
+    for (const auto& nota : notas) {
+        // Supondo que existam métodos getCodigo(), getData() e getTotal()
+        file << nota.getCodigo() << ","
+             << nota.getData() << ",";  // Supondo que Data pode ser convertida para string
+        for(Item iten : nota.getItens()){
+            file << iten.getCodigo()<< ",";
+            file << iten.getProduto().getNome()<< ",";
+            file << iten.getQtd()<< ",";
+            if(iten.getProduto().getqtdTipo()==peso)
+                file << "peso" << ",";
+            if(iten.getProduto().getqtdTipo()==unidade)
+                file << "unidade" << ",";
+                
+        }
+        file << nota.getTotal() << "\n";
+             
+    }
+
+    file.close();
+}
+
+void saveProdutosToCSV(vector<Produto>& produtos, const std::string& filename) {
+    std::ofstream file(filename);
+
+    // Cabeçalho do CSV
+    file << "Codigo,Nome,Quantidade,Valor,Descricao,Validade\n";
+
+    for ( auto& produto : produtos) {
+        // Supondo que existam métodos de acesso para essas propriedades
+        file << produto.getCodigo() << ","
+             << produto.getNome() << ","
+             << produto.getQuantidade() << ","
+             << produto.getvalor() << ","
+             << produto.getDesc() << ","
+             << produto.getValidade() << "\n";  // Supondo que Validade pode ser convertida para string
+    }
+
+    file.close();
 }

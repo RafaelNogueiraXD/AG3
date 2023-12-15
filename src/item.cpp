@@ -10,3 +10,6 @@ Produto Item::getProduto(){
 int Item::getCodigo(){
     return codigo;
 }
+double Item::getQtd(){
+    return qtd;
+}
