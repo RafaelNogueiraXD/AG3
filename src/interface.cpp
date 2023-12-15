@@ -6,15 +6,54 @@
 using namespace std;
 InterfaceG::InterfaceG(){
     int opcao;
-    Produto prod();
     Estoque MeuEstoque("./assets/mercado.csv");
     do{
         opcao=menu();
         switch(opcao){
             case 0:
                 break;
-            case 2: 
+            case 2:{
+                int codigo;
+                string nome,desc, qtdtipo;
+                double quanti, value;
+                int dia,mes, ano;
+                codigo= pegaInteiro("Digite o código do produto:");
+                nome = pegaString("Digite o nome do Produto:");
+                desc= pegaString("Digite a descricao do Produto:");
+                qtdtipo = pegaString("Digite o Tipo da quantidade do produto (Unidades ou peso)");
+                
+                Produto prod(codigo,nome,quanti,value,desc,Data(dia,mes,ano),qtdtipo);
+                MeuEstoque.addProduto(prod);
                 break;
+            }
+            case 3:{
+                int codigo;
+                codigo = pegaInteiro("Digite o Código do Produto a ser excluido:");
+                MeuEstoque.removeProduto(codigo);
+                break;
+            }
+            case 4:{
+                int codigo;
+                string nome,desc, qtdtipo;
+                double quanti, value;
+                int dia,mes, ano;
+                Produto prod(codigo,nome,quanti,value,desc,Data(dia,mes,ano),qtdtipo);
+                codigo = pegaInteiro("Digite o Código do Produto a ser editado:");
+                MeuEstoque.updateProduto(codigo,prod);
+                break;
+            }
+            case 5:
+                MeuEstoque.mostraEstoque();
+                break;
+            case 7:{
+                int codigo;
+                codigo = pegaInteiro("Digite o Código do Produto a ser excluido:");
+                Produto Busca = MeuEstoque.getProduto(codigo);
+                Busca.showProduct();
+                break;
+            }
+
+
         }
     }while(opcao != 0 );
     
@@ -66,4 +105,22 @@ int InterfaceG::menu(){
     cout<<"8-Buscar Nota Fiscal"<<endl;
     cin >> opcao;
     return opcao;
+}
+Estoque InterfaceG::realizarCompra(Estoque mercado){
+    int op, numProdutos;
+    do{
+
+        mercado.mostraEstoque();
+        op = pegaInteiro("digite o numero do produto");
+        Produto pesquisado = mercado.getProduto(op); 
+        numProdutos = pegaDouble("digite a quantia desse produto");
+        while(pesquisado.getQuantidade() < numProdutos){
+            numProdutos = pegaDouble("digite um numero menor: ");
+        }
+        while(numProdutos - int(numProdutos) != 0 && pesquisado.getqtdTipo() == unidade){
+            numProdutos = pegaDouble("digite um numero inteiro: ");
+        }
+
+    }while(op);
+
 }
