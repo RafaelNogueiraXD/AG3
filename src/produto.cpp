@@ -9,6 +9,9 @@ Produto::Produto(int codigo1, string nome1, double qtd1, double valor1, string d
     }
     else qtdTipo = unidade;
 }
+Produto::Produto(int codigo1)
+     : codigo(codigo1){
+}
 
 string Produto::getNome() {
     return nome;

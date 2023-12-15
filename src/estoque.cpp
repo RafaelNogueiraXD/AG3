@@ -107,7 +107,8 @@ Produto Estoque::getProduto(int codigo)
             return item.second;
         }
     }
-    throw runtime_error("Produto não encontrado");
+    Produto prod(0);
+    return prod;
 }
 
 // Atualiza um produto existente

@@ -21,6 +21,7 @@ private:
 
 public:
    Produto(int codigo1, string nome1, double qtd1, double valor1, string desc1, Data validade1, string qtdtipo);
+   Produto(int codigo1);
 
     // Getters e Setters existentes
     string getNome();  

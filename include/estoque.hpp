@@ -13,6 +13,8 @@ class Estoque : public IProdutos  {
     public: 
 
   Estoque(const string& caminhoArquivo);
+    Estoque();
+
    bool addProduto(Produto p); 
 
    bool removeProduto(int codigo) override;

@@ -2,8 +2,6 @@
 #include <iostream>
 #include <string>
 #include "interface.hpp"
-#include "estoque.hpp"
-#include "inotafiscal.hpp"
 
 using namespace std;
 InterfaceG::InterfaceG(){
@@ -23,6 +21,13 @@ InterfaceG::InterfaceG(){
 }
 int InterfaceG::pegaInteiro(string enunciado){
     int valor;
+    cout << enunciado << endl;
+    cin >> valor;
+    getchar();
+    return valor;
+}
+double InterfaceG::pegaDouble(string enunciado){
+    double valor;
     cout << enunciado << endl;
     cin >> valor;
     getchar();
